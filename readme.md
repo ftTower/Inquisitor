@@ -197,8 +197,8 @@ Install required packages and clone the project repository:
 sudo apt-get update && sudo apt-get upgrade -y
 sudo apt-get install net-tools iputils-ping iproute2 vim git -y
 sudo sysctl -w net.ipv4.ip_forward=1
-git clone https://github.com/ftTower/Piscine-Cybersecurity.git Piscine-Cybersecurity
-cd Piscine-Cybersecurity/Inquisitor
+git clone https://github.com/ftTower/Inquisitor.git Inquisitor
+cd Inquisitor
 echo "Setup complete."
 source venv/bin/activate
 ```
