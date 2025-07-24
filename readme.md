@@ -4,6 +4,26 @@
 ![header](https://github.com/ftTower/ftTower/blob/main/assets/Inquisitor/header.png)
 
 ---
+## Table of Contents
+
+1. [Virtual Machine Setup](#virtual-machine-setup)
+    - [Shared Clipboard Configuration](#shared-clipboard-configuration)
+    - [Root Access](#root-access)
+2. [VM Network Configuration](#vm-network-configuration)
+    - [Creating a NAT Network](#creating-a-nat-network)
+    - [Configuring DHCP for NAT Network](#configuring-dhcp-for-nat-network)
+    - [Testing Connectivity Between VMs](#testing-connectivity-between-vms)
+    - [Enabling Promiscuous Mode for the Attacker VM](#enabling-promiscuous-mode-for-the-attacker-vm)
+3. [Preparation for Attack Demo](#preparation-for-attack-demo)
+    - [Setting Up the FTP Server (Target VM)](#setting-up-the-ftp-server-target-vm)
+    - [Testing the FTP Client (Source VM)](#testing-the-ftp-client-source-vm)
+4. [Setting Up the Attacker VM (Inquisitor)](#setting-up-the-attacker-vm-inquisitor)
+5. [Man-in-the-Middle Attack](#man-in-the-middle-attack)
+    - [Gathering Network Information](#gathering-network-information)
+    - [Running Inquisitor](#running-inquisitor)
+    - [Flushing ARP Cache on VMs](#flushing-arp-cache-on-vms)
+    - [Capturing FTP Packets](#capturing-ftp-packets)
+---
 
 ## Virtual Machine Setup
 
