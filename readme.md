@@ -1,5 +1,6 @@
 # INQUISITOR
 
+![header](https://github.com/ftTower/ftTower/blob/main/assets/Inquisitor/header.png)
 ---
 
 ## Virtual Machine Setup
