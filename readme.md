@@ -1,4 +1,5 @@
 # INQUISITOR
+> **"In a Man-in-the-Middle attack, trust is the first victim."**
 
 ![header](https://github.com/ftTower/ftTower/blob/main/assets/Inquisitor/header.png)
 ---
