@@ -2,6 +2,7 @@
 > **"In a Man-in-the-Middle attack, trust is the first victim."**
 
 ![header](https://github.com/ftTower/ftTower/blob/main/assets/Inquisitor/header.png)
+
 ---
 
 ## Virtual Machine Setup
@@ -45,7 +46,7 @@ su -
 
 ### Configuring DHCP for NAT Network
 
-Make sure all VMs use DHCP for the NAT network:
+Ensure all VMs use DHCP for the NAT network:
 
 ```bash
 sudo bash -c 'cat <<EOF > /etc/network/interfaces
@@ -59,7 +60,6 @@ iface lo inet loopback
 auto enp0s3
 iface enp0s3 inet dhcp
 EOF'
-echo "Network configuration updated. Using DHCP for NAT network."
 sudo systemctl restart networking
 clear && ip a
 ```
@@ -84,6 +84,8 @@ clear && ip a
 1. In VirtualBox, go to **Machine > Settings > Network > Advanced > Promiscuous Mode**.
 2. Set it to **Allow All**.
 
+![Promiscuous](https://github.com/ftTower/ftTower/blob/main/assets/Inquisitor/promiscuous.png)
+
 ---
 
 ## Preparation for Attack Demo
@@ -100,7 +102,7 @@ sudo systemctl status vsftpd
 sudo cp /etc/vsftpd.conf /etc/vsftpd.conf.original
 ```
 
-Edit `/etc/vsftpd.conf` to improve security and enable passive mode. Make sure these lines are present:
+Edit `/etc/vsftpd.conf` to improve security and enable passive mode. Ensure these lines are present:
 
 ```ini
 anonymous_enable=NO
@@ -163,6 +165,8 @@ put client_test.txt
 ls
 ```
 
+![put](https://github.com/ftTower/ftTower/blob/main/assets/Inquisitor/put_client.png)
+
 ---
 
 ## Setting Up the Attacker VM (Inquisitor)
@@ -176,6 +180,7 @@ sudo sysctl -w net.ipv4.ip_forward=1
 git clone https://github.com/ftTower/Piscine-Cybersecurity.git Piscine-Cybersecurity
 cd Piscine-Cybersecurity/Inquisitor
 echo "Setup complete."
+source venv/bin/activate
 ```
 
 ---
@@ -226,7 +231,7 @@ Replace the placeholders with the actual values:
 To clear the ARP cache and force the VM to send a new one, use:
 
 ```bash
-ip -s -s neigh flush all && ping -c 1 <ip_address_of_other_vm>
+ip -s -s neigh flush all && ping -c 1 <ip_address_of_source_vm>
 ```
 
 To view the ARP cache and compare with the other VM's MAC address:
@@ -236,3 +241,24 @@ clear && ip a && echo && ip neigh show
 ```
 
 Normally, Inquisitor will replace both MAC addresses mapped to the other IPs with the attacker's MAC address.
+
+![arp cache](https://github.com/ftTower/ftTower/blob/main/assets/Inquisitor/arp_cache.png)
+
+---
+
+### Capturing FTP Packets
+
+Once Inquisitor has poisoned both the target and source (see above screenshot), reconnect to the FTP server from the source VM:
+
+![ftp connection](https://github.com/ftTower/ftTower/blob/main/assets/Inquisitor/ftp_connection.png)
+
+You will see traffic passing through the Inquisitor VM:
+
+![captured packets](https://github.com/ftTower/ftTower/blob/main/assets/Inquisitor/ftp_traffic.png)
+
+To capture file exchanges, upload a file from the source VM to the FTP server:
+
+![captured files](https://github.com/ftTower/ftTower/blob/main/assets/Inquisitor/put_file.png)
+
+That's it!
+
