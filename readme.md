@@ -181,6 +181,8 @@ echo "Setup complete."
 
 ## Man-in-the-Middle Attack
 
+![illustration](https://github.com/ftTower/ftTower/blob/main/assets/Inquisitor/illustration.png)
+
 ### Gathering Network Information
 
 On the **Source VM**, get the IP and MAC addresses:
